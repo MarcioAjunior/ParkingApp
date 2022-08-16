@@ -1,6 +1,7 @@
 import cv2 as cv
 import cvzone
 import numpy as np
+import pickle 
 from time import sleep
 from resizeImage import resizingImage
 
@@ -11,6 +12,10 @@ class VideoCamera:
 
     def __del__(self): 
       self.video.release()
+
+    def write(self):
+      with open('./src/resources/ParkingPos','wb') as f:
+            pickle.dump(self.lista_de_vagas, f)  
 
     def get_frame(self):
       ret, frame = self.video.read()

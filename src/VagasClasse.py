@@ -1,3 +1,5 @@
+from RecordClasse import Record
+
 class Vagas:
 
     COUNT = 0
@@ -6,7 +8,7 @@ class Vagas:
                 id = 'Num',
                 positions = [],
                 emUso=False,
-                tempoTotalUsado=0,
+                record=[],
                 create = False
                 ):
         self.id = id
@@ -14,7 +16,7 @@ class Vagas:
             self.id = Vagas.my_id()
         self.positions = positions
         self.emUso = emUso
-        self.tempoTotalUsado = tempoTotalUsado
+        self.record = [Record(item) for item in record]
 
     @classmethod
     def my_id(c):
@@ -24,7 +26,8 @@ class Vagas:
     def __repr__(self):
         repr = '{}'.format(self.id)
         reprVagas = str([item for item in self.positions])
-        return "id :{}, emUso:{}, tempoTotal: {} positions: {}".format(repr,self.emUso,self.tempoTotalUsado,reprVagas)
+        record = str([item for item in self.record])
+        return "id :{}, emUso:{}, record: {} positions: {}".format(repr,self.emUso,record,reprVagas)
 
 
     def rep_positions(self):
