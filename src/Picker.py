@@ -4,7 +4,6 @@ import numpy as np
 from resizeImage import resizingImage
 from VagasClasse import Vagas
 
-#Carregando vagas desenhadas
 try:
     with open('src/resources/ParkingPos', 'rb') as f:
         lista_de_vagas = pickle.load(f)
@@ -25,10 +24,6 @@ def mouseClick(event, x, y, flags, params):
     if event == cv.EVENT_RBUTTONDOWN:
         vagasList.pop()
 
-    lista_de_vagas = [Vagas(positions=item) for item in vagasList]
-
-    with open('./src/resources/ParkingPos','wb') as f:
-        pickle.dump(lista_de_vagas, f)
 
 while True:
     #Lendo e redimensionando a imagem
@@ -41,4 +36,8 @@ while True:
     cv.setMouseCallback("Image", mouseClick)
     
     if cv.waitKey(1) & 0xFF==ord('x'):
+        lista_de_vagas = [Vagas(positions=item,create=True) for item in vagasList]
+
+        with open('./src/resources/ParkingPos','wb') as f:
+            pickle.dump(lista_de_vagas, f)
         break

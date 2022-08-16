@@ -1,4 +1,4 @@
 import cv2 as cv
 
-def resizingImage(img):
+def resizingImage(img = None):
     return cv.resize(img, (1100,600))

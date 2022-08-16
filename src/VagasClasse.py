@@ -1,19 +1,30 @@
 class Vagas:
 
+    COUNT = 0
+
     def __init__(self, 
+                id = 'Num',
                 positions = [],
-                status=False,
+                emUso=False,
                 tempoTotalUsado=0,
-                s_id = 0):
-        self.id = s_id
+                create = False
+                ):
+        self.id = id
+        if id == 'Num' and create:
+            self.id = Vagas.my_id()
         self.positions = positions
-        self.status = status
+        self.emUso = emUso
         self.tempoTotalUsado = tempoTotalUsado
+
+    @classmethod
+    def my_id(c):
+        c.COUNT += 1
+        return c.COUNT
 
     def __repr__(self):
         repr = '{}'.format(self.id)
         reprVagas = str([item for item in self.positions])
-        return "id :{}, status:{}, tempoTotal: {} positions: {}".format(repr,self.status,self.tempoTotalUsado,reprVagas)
+        return "id :{}, emUso:{}, tempoTotal: {} positions: {}".format(repr,self.emUso,self.tempoTotalUsado,reprVagas)
 
 
     def rep_positions(self):
