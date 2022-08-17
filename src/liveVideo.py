@@ -1,22 +1,20 @@
 from flask import Flask, Response, stream_with_context
 from CameraClasse import VideoCamera
-from main2 import init
 from MainStramVideo import MAIN_VIDEO_STREAM
+from flask_cors import CORS
 import threading
 import time
+from timer import verify
+
+
 app = Flask(__name__)
+CORS(app)
 
 def gen(camera):
         while True:
             frame = MAIN_VIDEO_STREAM.get_frame().get('jpeg')
             yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
-
-def streamer(json):
-    while True:
-        yield str(json)
-        time.sleep(5)
-
 
 
 @app.route('/video_feed')
@@ -27,9 +25,11 @@ def video_feed():
 
 @app.route('/')
 def send_all_data():
+    objt_list = [{item} for item in MAIN_VIDEO_STREAM.lista_de_vagas]
+    print(objt_list)
     return {
-        "msg" : f"{MAIN_VIDEO_STREAM.lista_de_vagas}"
-     }   
+        "msg" : f'{objt_list}'
+     }
 
 @app.route('/<vaga_id>')
 def send_one_data(vaga_id: str):
@@ -46,9 +46,11 @@ def send_one_data(vaga_id: str):
 def startServer():
     app.run(host='0.0.0.0', port=5000, threaded=True, use_reloader=False)
 
+def verify_timer():
+    verify()
+
 if __name__ == '__main__':
     threadServer = threading.Thread(target=startServer,name='StarterServer')
-    threadApp = threading.Thread(target=init, name='startApp')
-    threadApp.start()
-    time.sleep(1)
+    timer = threading.Thread(target=verify_timer, name='Verify')
+    timer.start()
     threadServer.start()
