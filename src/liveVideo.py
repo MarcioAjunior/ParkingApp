@@ -49,8 +49,13 @@ def startServer():
 def verify_timer():
     verify()
 
+def write():
+    MAIN_VIDEO_STREAM.write()
+
 if __name__ == '__main__':
     threadServer = threading.Thread(target=startServer,name='StarterServer')
     timer = threading.Thread(target=verify_timer, name='Verify')
+    write = threading.Thread(target=write, name='Write')
+    write.start()
     timer.start()
     threadServer.start()

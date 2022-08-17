@@ -6,16 +6,20 @@ from time import sleep
 from resizeImage import resizingImage
 
 class VideoCamera: 
-    def __init__(self, src=None, lista_de_vagas=[]): 
+    def __init__(self, src=None, lista_de_vagas=[], file=None): 
       self.video = cv.VideoCapture(src)
       self.lista_de_vagas = lista_de_vagas
+      self.file = file
 
     def __del__(self): 
       self.video.release()
 
     def write(self):
+      sleep(10)
       with open('./src/resources/ParkingPos','wb') as f:
-            pickle.dump(self.lista_de_vagas, f)  
+            pickle.dump(self.lista_de_vagas, f)
+      print('ESCREVI PORRA !!!')
+      self.write()
 
     def get_frame(self):
       ret, frame = self.video.read()
