@@ -37,6 +37,7 @@ while True:
     
     if cv.waitKey(1) & 0xFF==ord('x'):
         lista_de_vagas = [Vagas(positions=item,create=True) for item in vagasList]
+        print('escrevendo', lista_de_vagas)
 
         with open('./src/resources/ParkingPos','wb') as f:
             pickle.dump(lista_de_vagas, f)

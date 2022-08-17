@@ -4,16 +4,11 @@ class Vagas:
 
     COUNT = 0
 
-    def __init__(self, 
-                id = 'Num',
-                positions = [],
-                emUso=False,
-                record=[],
-                create = False
-                ):
-        self.id = id
-        if id == 'Num' and create:
+    def __init__(self, _id = None,positions = [],emUso=False,record=[],create = False):
+        if _id == None:
             self.id = Vagas.my_id()
+        else:
+            self.id = _id       
         self.positions = positions
         self.emUso = emUso
         self.record = [Record(item) for item in record]
@@ -24,10 +19,9 @@ class Vagas:
         return c.COUNT
 
     def __repr__(self):
-        repr = '{}'.format(self.id)
         reprVagas = str([item for item in self.positions])
         record = str([item for item in self.record])
-        return "id :{}, emUso:{}, record: {} positions: {}".format(repr,self.emUso,record,reprVagas)
+        return "id :{}, emUso:{}, record: {} positions: {}".format(self.id,self.emUso,record,reprVagas)
 
 
     def rep_positions(self):
