@@ -11,7 +11,7 @@ class Vagas:
             self.id = _id       
         self.positions = positions
         self.emUso = emUso
-        self.record = [Record(item) for item in record]
+        self.record = [Record(item, vaga=self.id) for item in record]
 
     @classmethod
     def my_id(c):
@@ -30,7 +30,7 @@ class Vagas:
         'id' : self.id,
         'positions' : self.positions,
         'emUso': self.emUso,
-        'record' : self.record,
+        'record' : [record.json() for record in self.record],
         }
 
     def rep_positions(self):

@@ -28,13 +28,12 @@ def video_feed():
 def send_all_data():
     #Aqui
     objt_list = [item.json() for item in MAIN_VIDEO_STREAM.lista_de_vagas]
-    print(objt_list)
+    print(objt_list,'MINHA LISTA SAINDO')
     return {"msg" : json.dumps(objt_list)}
 
 @app.route('/<vaga_id>')
 def send_one_data(vaga_id: str):
         for vaga in MAIN_VIDEO_STREAM.lista_de_vagas:
-            print(vaga)
             if str(vaga.id) == vaga_id:
                 return {
                         "msg" : f'{vaga}'
