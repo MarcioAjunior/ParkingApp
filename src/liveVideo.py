@@ -1,11 +1,12 @@
-from flask import Flask, Response, stream_with_context
+from flask import Flask, Response, stream_with_context, jsonify
 from CameraClasse import VideoCamera
 from MainStramVideo import MAIN_VIDEO_STREAM
+from VagasClasse import Vagas
 from flask_cors import CORS
 import threading
 import time
 from timer import verify
-
+import json
 
 app = Flask(__name__)
 CORS(app)
@@ -25,11 +26,10 @@ def video_feed():
 
 @app.route('/')
 def send_all_data():
-    objt_list = [{item} for item in MAIN_VIDEO_STREAM.lista_de_vagas]
+    #Aqui
+    objt_list = [item.json() for item in MAIN_VIDEO_STREAM.lista_de_vagas]
     print(objt_list)
-    return {
-        "msg" : f'{objt_list}'
-     }
+    return {"msg" : json.dumps(objt_list)}
 
 @app.route('/<vaga_id>')
 def send_one_data(vaga_id: str):
@@ -39,12 +39,12 @@ def send_one_data(vaga_id: str):
                 return {
                         "msg" : f'{vaga}'
                     }
-            return {"msg" :"Não encontrado"}
+            return json.dumps({"msg" :"Não encontrado"})
 
 
 
 def startServer():
-    app.run(host='0.0.0.0', port=5000, threaded=True, use_reloader=False)
+    app.run(host='0.0.0.0', port=5001, threaded=True, use_reloader=False)
 
 def verify_timer():
     verify()

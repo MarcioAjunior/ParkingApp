@@ -24,5 +24,14 @@ class Vagas:
         return "id :{}, emUso:{}, record: {} positions: {}".format(self.id,self.emUso,record,reprVagas)
 
 
+    def json(self):
+        """Retorna o objeto como um json"""
+        return {
+        'id' : self.id,
+        'positions' : self.positions,
+        'emUso': self.emUso,
+        'record' : self.record,
+        }
+
     def rep_positions(self):
         return self.positions

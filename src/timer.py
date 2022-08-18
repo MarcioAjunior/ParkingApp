@@ -5,7 +5,6 @@ from RecordClasse import Record
 from MainStramVideo import MAIN_VIDEO_STREAM
 
 def verify():
-    print('ESTOU EXECUTANDO !!!')
     for vaga in MAIN_VIDEO_STREAM.lista_de_vagas:
         if vaga.emUso == True:
             if vaga.record == []:

@@ -18,7 +18,6 @@ class VideoCamera:
       sleep(10)
       with open('./src/resources/ParkingPos','wb') as f:
             pickle.dump(self.lista_de_vagas, f)
-      print('ESCREVI PORRA !!!')
       self.write()
 
     def get_frame(self):
