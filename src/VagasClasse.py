@@ -4,7 +4,7 @@ class Vagas:
 
     COUNT = 0
 
-    def __init__(self, _id = None,positions = [],emUso=False,record=[],create = False):
+    def __init__(self, _id = None,positions = [],emUso=False,record=[],create = False, tempoPorMes = [0,0,0,0,0,0,0,0,0,0,0,0]):
         if _id == None:
             self.id = Vagas.my_id()
         else:
@@ -12,7 +12,8 @@ class Vagas:
         self.positions = positions
         self.emUso = emUso
         self.record = [Record(item, vaga=self.id) for item in record]
-
+        self.tempoPorMes = tempoPorMes
+    
     @classmethod
     def my_id(c):
         c.COUNT += 1
@@ -31,7 +32,15 @@ class Vagas:
         'positions' : self.positions,
         'emUso': self.emUso,
         'record' : [record.json() for record in self.record],
+        'tempoPorMes' : self.tempoPorMes
         }
 
-    def rep_positions(self):
-        return self.positions
+    def calc(self):
+        toMonth = [0,0,0,0,0,0,0,0,0,0,0,0]
+        print(self.record, 'self record no calc')
+        for i in range(13):
+            for rec in self.record:
+                if int(record["mes"]) == i:
+                    toMonth[i - 1] += record["tempoUsado"]
+        print(toMonth,'to month')
+        return toMonth 
