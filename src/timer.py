@@ -15,7 +15,7 @@ def verify():
             for record in vaga.record:
                 if record.data == datetime.now().strftime("%d/%m/%Y"):
                     record.tempoUsado +=1
-                    vaga.tempoPorMes[int(record.mes) - 1] += 1
+                    vaga.tempoPorMes[int(record.mes) - 1] += 0.00027
                 else:
                     vaga.record.append(Record(0, vaga=vaga.id))
     sleep(1.1)
