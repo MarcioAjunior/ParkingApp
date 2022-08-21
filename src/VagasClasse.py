@@ -32,7 +32,7 @@ class Vagas:
         'positions' : self.positions,
         'emUso': self.emUso,
         'record' : [record.json() for record in self.record],
-        'tempoPorMes' : self.tempoPorMes
+        'tempoPorMes' : self.tempoPorMes 
         }
 
     def calc(self):

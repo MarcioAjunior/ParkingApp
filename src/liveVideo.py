@@ -34,7 +34,6 @@ def send_all_data():
 @app.route('/<vaga_id>')
 def send_one_data(vaga_id: str):
         for vaga in MAIN_VIDEO_STREAM.lista_de_vagas:
-            print(str(vaga.id))
             if str(vaga.id) == vaga_id:
                 return {
                         "msg" : vaga.json()
