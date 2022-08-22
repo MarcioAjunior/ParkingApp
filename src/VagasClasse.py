@@ -32,15 +32,5 @@ class Vagas:
         'positions' : self.positions,
         'emUso': self.emUso,
         'record' : [record.json() for record in self.record],
-        'tempoPorMes' : self.tempoPorMes 
+        'tempoPorMes' : [round(tempo_mes,2) for tempo_mes in self.tempoPorMes] 
         }
-
-    def calc(self):
-        toMonth = [0,0,0,0,0,0,0,0,0,0,0,0]
-        print(self.record, 'self record no calc')
-        for i in range(13):
-            for rec in self.record:
-                if int(record["mes"]) == i:
-                    toMonth[i - 1] += record["tempoUsado"]
-        print(toMonth,'to month')
-        return toMonth 
