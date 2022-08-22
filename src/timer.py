@@ -16,7 +16,7 @@ def verify():
                 if record.data == datetime.now().strftime("%d/%m/%Y"):
                     record.tempoUsado +=1
                     vaga.tempoPorMes[int(record.mes) - 1] += 0.00027
-           
+                    vaga.tempoPorMes[int(record.mes) - 1] = round(vaga.tempoPorMes[int(record.mes) - 1])
             data_hoje = [rec for rec in vaga.record if rec.data == datetime.now().strftime("%d/%m/%Y")]
             if data_hoje == []:
                 record = Record(tempoUsado=0, vaga=vaga.id)
